@@ -34,17 +34,33 @@ namespace TicTacToe
         }
 
 
-        public static string [] Move(string[] board)
+        public static string [] Move(string[] board, bool player1)
         {
             int validMove = 0;
+            string player;
+            string token;
             while (validMove != 1)
             {
-                Console.WriteLine("Choose where you want to place a move..");
+                if (player1 == true)
+                {
+                    player = "Player 1";
+                    token = "X";
+                }
+                else
+                {
+                    player = "Player 2";
+                    token = "O";
+                }
+
+                
+
+                Console.WriteLine("{0}, choose where you want to place a move..", player);
                 int move = (int.Parse(Console.ReadLine())) - 1;
                 if (board[move] != "X" && board[move] != "O")
                 {
-                    board[move] = "X";
+                    board[move] = token;
                     validMove = 1;
+                    player1 = !player1;
 
                 }
                 else
@@ -63,14 +79,16 @@ namespace TicTacToe
   
         static void Main(string[] args)
         {
+            bool player1 = true;
             string [] board = gameBoard.Create();
 
             gameBoard.Print(board);
-            gameBoard.Move(board);
+
+            gameBoard.Move(board, player1);
             gameBoard.Print(board);
-            gameBoard.Move(board);
+            gameBoard.Move(board, player1);
             gameBoard.Print(board);
-            gameBoard.Move(board);
+            gameBoard.Move(board, player1);
             Console.ReadKey();
         }
     }
