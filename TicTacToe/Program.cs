@@ -60,7 +60,7 @@ namespace TicTacToe
                 {
                     board[move] = token;
                     validMove = 1;
-                    player1 = !player1;
+
 
                 }
                 else
@@ -83,12 +83,14 @@ namespace TicTacToe
             string [] board = gameBoard.Create();
 
             gameBoard.Print(board);
+            for (int i = 0; i < 3; i++)
+            {
+                gameBoard.Move(board, player1);
+                gameBoard.Print(board);
+                player1 = !player1;
+            }
+            
 
-            gameBoard.Move(board, player1);
-            gameBoard.Print(board);
-            gameBoard.Move(board, player1);
-            gameBoard.Print(board);
-            gameBoard.Move(board, player1);
             Console.ReadKey();
         }
     }
