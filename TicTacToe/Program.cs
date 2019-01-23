@@ -33,32 +33,36 @@ namespace TicTacToe
             Console.WriteLine();
         }
 
+        public static string [] Player(bool player1)
+        {
+            string[] player = new string [2];
+            if (player1 == true)
+            {
+                player[0] = "Player 1";
+                player[1] = "X";  
+            }
+            else
+            {
+                player[0] = "Player 2";
+                player[1] = "O";
+            }
+            return player;
+        }
 
         public static string [] Move(string[] board, bool player1)
         {
             int validMove = 0;
-            string player;
-            string token;
             while (validMove != 1)
             {
-                if (player1 == true)
-                {
-                    player = "Player 1";
-                    token = "X";
-                }
-                else
-                {
-                    player = "Player 2";
-                    token = "O";
-                }
 
+                string [] player = Player(player1);
                 
 
-                Console.WriteLine("{0}, choose where you want to place a move..", player);
+                Console.WriteLine("{0}, choose where you want to place a move..", player[0]);
                 int move = (int.Parse(Console.ReadLine())) - 1;
                 if (board[move] != "X" && board[move] != "O")
                 {
-                    board[move] = token;
+                    board[move] = player[1];
                     validMove = 1;
 
 
