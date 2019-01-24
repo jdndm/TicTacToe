@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace TicTacToe
 {
-    class gameBoard
+    class GameBoard
     {
         public static string [] Create()
         {
@@ -61,7 +61,10 @@ namespace TicTacToe
                     try
                     {
                         move = int.Parse(Console.ReadLine()) - 1;
-                        validInt = true;
+                        if (move < 0 || move > 9)
+                            throw new Exception();
+                        else
+                            validInt = true;
                     }
                     catch
                     {
@@ -133,23 +136,23 @@ namespace TicTacToe
         {
             bool player1 = true;
             int win = 0;
-            string[] board = gameBoard.Create();
-            gameBoard.Print(board);
+            string[] board = GameBoard.Create();
+            GameBoard.Print(board);
             do
             {
-                gameBoard.Move(board, player1);
-                gameBoard.Print(board);
-                win = gameBoard.WinningCondition(board, win);
+                GameBoard.Move(board, player1);
+                GameBoard.Print(board);
+                win = GameBoard.WinningCondition(board, win);
                 if (win == 0)
                 {
-                    win = gameBoard.DrawCondition(board, win);
+                    win = GameBoard.DrawCondition(board, win);
                     if (win == 0)
                     {
                         player1 = !player1;
                     }
                 }
             } while (win == 0);
-            string[] player = gameBoard.Player(player1);
+            string[] player = GameBoard.Player(player1);
             if (win == 1)
             {
                 Console.WriteLine("Congratulations {0} you have won the game.", player[0]);
