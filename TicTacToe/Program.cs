@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Linq;
 
 namespace TicTacToe
 {
@@ -84,7 +85,7 @@ namespace TicTacToe
             }
             return board;
         } 
-        public static bool WinningCondition(string [] board, bool win)
+        public static int WinningCondition(string [] board, int win)
         {
             int[,] winningMoves = new int[8, 3] { { 0, 1, 2 },
                                                   { 3, 4, 5 },
@@ -99,12 +100,29 @@ namespace TicTacToe
             {
                 if (board[winningMoves[i,0]] == board[winningMoves[i,1]] && board[winningMoves[i,1]] == board[winningMoves[i, 2]])
                 {
-                    win = true;
+                    win = 1;
                     break;
                 }
                 else
                 {
-                    win = false;
+                    win = 0;
+                }
+            }
+            return win;
+        }
+        public static int DrawCondition (string [] board, int win)
+        {
+            string[] drawArray = new string[] { "1", "2", "3,", "4", "5", "6", "7", "8", "9" };
+            for (int i = 0; i < 9; i++)
+            {
+                if (board[i] == drawArray[i])
+                {
+                    win = 0;
+                    break;
+                }
+                else
+                {
+                    win = -1;
                 }
             }
             return win;
@@ -115,7 +133,7 @@ namespace TicTacToe
         static void Main(string[] args)
         {
             bool player1 = true;
-            bool win = false;
+            int win = 0;
             string[] board = gameBoard.Create();
             gameBoard.Print(board);
             do
@@ -123,13 +141,26 @@ namespace TicTacToe
                 gameBoard.Move(board, player1);
                 gameBoard.Print(board);
                 win = gameBoard.WinningCondition(board, win);
-                if (win == false)
+                if (win == 0)
                 {
-                    player1 = !player1;
+                    win = gameBoard.DrawCondition(board, win);
+                    if (win == 0)
+                    {
+                        player1 = !player1;
+                    }
                 }
-            } while (win == false);
+            } while (win == 0);
             string[] player = gameBoard.Player(player1);
-            Console.WriteLine("Congratulations {0} you have won the game.", player[0]);
+            if (win == 1)
+            {
+                Console.WriteLine("Congratulations {0} you have won the game.", player[0]);
+
+            }
+            else
+            {
+                Console.WriteLine("No more moves possible, it is a DRAW.");
+
+            }
             Console.ReadKey();
         }
     }
