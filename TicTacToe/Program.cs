@@ -70,44 +70,28 @@ namespace TicTacToe
             }
             return board;
         } 
-        public static bool WinningCondition(string [] board)
+        public static bool WinningCondition(string [] board, bool win)
         {
-            bool win;
-            if (board[0] == board[1] && board[1] == board[2])
+            int[,] winningMoves = new int[8, 3] { { 0, 1, 2 },
+                                                  { 3, 4, 5 },
+                                                  { 6, 7, 8 },
+                                                  { 0, 3, 6 },
+                                                  { 1, 4, 7 },
+                                                  { 2, 5, 8 },
+                                                  { 0, 4, 8 },
+                                                  { 6, 4, 2 } };
+
+            for (int i = 0; i < 8; i++)
             {
-                win = true;
-            }
-            else if (board[3] == board[4] && board[4] == board[5])
-            {
-                win = true;
-            }
-            else if (board[6] == board[7] && board[7] == board[8])
-            {
-                win = true;
-            }
-            else if (board[0] == board[3] && board[3] == board[6])
-            {
-                win = true;
-            }
-            else if (board[1] == board[4] && board[4] == board[7])
-            {
-                win = true;
-            }
-            else if (board[2] == board[5] && board[5] == board[8])
-            {
-                win = true;
-            }
-            else if (board[0] == board[4] && board[4] == board[8])
-            {
-                win = true;
-            }
-            else if (board[6] == board[4] && board[4] == board[2])
-            {
-                win = true;
-            }
-            else
-            {
-                win = false;
+                if (board[winningMoves[i,0]] == board[winningMoves[i,1]] && board[winningMoves[i,1]] == board[winningMoves[i, 2]])
+                {
+                    win = true;
+                    break;
+                }
+                else
+                {
+                    win = false;
+                }
             }
             return win;
         }
@@ -124,13 +108,13 @@ namespace TicTacToe
             {
                 gameBoard.Move(board, player1);
                 gameBoard.Print(board);
-                win = gameBoard.WinningCondition(board);
+                win = gameBoard.WinningCondition(board, win);
                 if (win == false)
                 {
                     player1 = !player1;
                 }
             } while (win == false);
-
+            Console.WriteLine("Congratulations you have won the game.");
             Console.ReadKey();
         }
     }
