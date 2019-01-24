@@ -111,12 +111,12 @@ namespace TicTacToe
         }
     }
     class Program
-    { 
+    {
         static void Main(string[] args)
         {
             bool player1 = true;
             bool win = false;
-            string [] board = gameBoard.Create();
+            string[] board = gameBoard.Create();
             gameBoard.Print(board);
             do
             {
@@ -128,7 +128,8 @@ namespace TicTacToe
                     player1 = !player1;
                 }
             } while (win == false);
-            Console.WriteLine("Congratulations you have won the game.");
+            string[] player = gameBoard.Player(player1);
+            Console.WriteLine("Congratulations {0} you have won the game.", player[0]);
             Console.ReadKey();
         }
     }
