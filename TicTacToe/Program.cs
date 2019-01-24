@@ -54,7 +54,21 @@ namespace TicTacToe
             {
 
                 Console.WriteLine("{0}, choose where you want to place a move..", player[0]);
-                int move = (int.Parse(Console.ReadLine())) - 1;
+                bool validInt = false;
+                int move = -1;
+                while (!validInt)
+                {
+                    try
+                    {
+                        move = int.Parse(Console.ReadLine()) - 1;
+                        validInt = true;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Invalid Move, please enter an available number..");
+                    }
+                }
+
                 if (board[move] != "X" && board[move] != "O")
                 {
                     board[move] = player[1];
