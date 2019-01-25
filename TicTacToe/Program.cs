@@ -129,6 +129,15 @@ namespace TicTacToe
             }
             return win;
         }
+        public static int WinDraw (string [] board, int win)
+        {
+            win = GameBoard.WinningCondition(board, win);
+            if (win == 0)
+            {
+                win = GameBoard.DrawCondition(board, win);                
+            }
+            return win;
+        }
     }
     class Program
     {
@@ -142,15 +151,11 @@ namespace TicTacToe
             {
                 GameBoard.Move(board, player1);
                 GameBoard.Print(board);
-                win = GameBoard.WinningCondition(board, win);
+                win = GameBoard.WinDraw(board, win);
                 if (win == 0)
                 {
-                    win = GameBoard.DrawCondition(board, win);
-                    if (win == 0)
-                    {
-                        player1 = !player1;
-                    }
-                }
+                    player1 = !player1;
+                } 
             } while (win == 0);
             string[] player = GameBoard.Player(player1);
             if (win == 1)
