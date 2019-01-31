@@ -5,18 +5,20 @@ namespace TicTacToe
 {
     class GameBoard
     {
-        public static string[] Create()
-        {
-            int x = 1;
-            string[] board = new string[9];
-            for (int i = 0; i < 9; i++)
-            {
-                board[i] = Convert.ToString(x);
-                x++;
-            }
-            return board;
-        }
-        public static void Print(string[] board)
+
+        string[] board = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        //public string[] Create()
+        //{
+        //    int x = 1;
+        //    string[] board = new string[9];
+        //    for (int i = 0; i < 9; i++)
+        //    {
+        //        board[i] = Convert.ToString(x);
+        //        x++;
+        //    }
+        //    return board;
+        //}
+        public void Print()
         {
             Console.Clear();
             Console.WriteLine("PLAYER1: X PLAYER2: O");
@@ -31,7 +33,7 @@ namespace TicTacToe
             Console.WriteLine("     {0} |  {1} |  {2}  ", board[6], board[7], board[8]);
             Console.WriteLine();
         }
-        public static string[] Player(bool player1)
+        public string[] Player(bool player1)
         {
             string[] player = new string[2];
             if (player1 == true)
@@ -46,7 +48,7 @@ namespace TicTacToe
             }
             return player;
         }
-        public static string[] Move(string[] board, bool player1)
+        public string[] Move(bool player1)
         {
             int validMove = 0;
             string[] player = Player(player1);
@@ -81,13 +83,13 @@ namespace TicTacToe
                 {
                     Console.WriteLine("Position already taken, please choose another.");
                     Thread.Sleep(2000);
-                    Print(board);
+                    Print();
                 };
 
             }
             return board;
         }
-        public static int WinningCondition(string[] board, int win)
+        public int WinningCondition(int win)
         {
             int[,] winningMoves = new int[8, 3] { { 0, 1, 2 },
                                                   { 3, 4, 5 },
@@ -112,9 +114,9 @@ namespace TicTacToe
             }
             return win;
         }
-        public static int DrawCondition(string[] board, int win)
+        public int DrawCondition(int win)
         {
-            string[] drawArray = new string[] { "1", "2", "3,", "4", "5", "6", "7", "8", "9" };
+            string[] drawArray = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
             for (int i = 0; i < 9; i++)
             {
                 if (board[i] == drawArray[i])
@@ -129,12 +131,12 @@ namespace TicTacToe
             }
             return win;
         }
-        public static int WinDraw(string[] board, int win)
+        public int WinDraw(int win)
         {
-            win = GameBoard.WinningCondition(board, win);
+            win = WinningCondition(win);
             if (win == 0)
             {
-                win = GameBoard.DrawCondition(board, win);
+                win = DrawCondition(win);
             }
             return win;
         }
