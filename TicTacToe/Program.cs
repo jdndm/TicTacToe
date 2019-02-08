@@ -10,7 +10,6 @@ namespace TicTacToe
             bool player1 = true;
             int win = 0;
             GameBoard board = new GameBoard();
-            //board.Create();
             board.Print();
             do
             {

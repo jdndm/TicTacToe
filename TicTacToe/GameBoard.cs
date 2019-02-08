@@ -7,17 +7,7 @@ namespace TicTacToe
     {
 
         string[] board = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-        //public string[] Create()
-        //{
-        //    int x = 1;
-        //    string[] board = new string[9];
-        //    for (int i = 0; i < 9; i++)
-        //    {
-        //        board[i] = Convert.ToString(x);
-        //        x++;
-        //    }
-        //    return board;
-        //}
+
         public void Print()
         {
             Console.Clear();
